@@ -13,14 +13,10 @@ class DB:
         self.sibyl = MongoClient(self.db_url)['Sibyl']['SIBYLMODE']
 
     def is_vanitas(self, chat_id: int) -> bool:
-        x = self.vanitas.find_one({"chat_id": chat_id})
-        if x:
-            return True
-        return False
+        return bool(x := self.vanitas.find_one({"chat_id": chat_id}))
 
     def set_vanitas(self, chat_id: int):
-        set_vanitas = self.is_vanitas(chat_id)
-        if set_vanitas:
+        if set_vanitas := self.is_vanitas(chat_id):
             return
         return self.vanitas.insert_one({"chat_id": chat_id})
 
@@ -32,14 +28,10 @@ class DB:
 
 
     def is_sibyl(self, chat_id: int) -> bool:
-        x = self.sibyl.find_one({"chat_id": chat_id})
-        if x:
-            return True
-        return False
+        return bool(x := self.sibyl.find_one({"chat_id": chat_id}))
 
     def set_sibyl(self, chat_id: int):
-        set_sibyl = self.is_sibyl(chat_id)
-        if set_sibyl:
+        if set_sibyl := self.is_sibyl(chat_id):
             return
         return self.sibyl.insert_one({"chat_id": chat_id})
 

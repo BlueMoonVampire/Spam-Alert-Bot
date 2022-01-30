@@ -7,12 +7,12 @@ from typing import Tuple, List, Set, Union, Dict, Any
 
 def is_vanitasalert(user):
     res = get("https://vanitas-api.up.railway.app/user/" + str(user)).json()
-    return True if res['blacklisted'] else False
+    return bool(res['blacklisted'])
 
 
 def is_sibylalert(user):
     res = get("https://psychopass.animekaizoku.com/getInfo?token=5086015489:N0tFM9DsvPD-bjlvHx57KFqJuSS5-AmJIMsuqgidgSWd9hm7W1Zs-hdPhUAjn3U-&user-id=" + str(user)).json()
-    return True if res['success'] else False
+    return bool(res['success'])
 
 
 

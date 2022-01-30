@@ -17,13 +17,12 @@ v = vanitas()
 async def vanitasalert(_, message):
     if is_admin(message.chat.id, message.from_user.id):
         return
-    is_vanitas = db.is_vanitas(message.chat.id)
-    if not is_vanitas:
-        db.set_vanitas(message.chat.id)
-        await message.reply_text("Alert Mode Enable")
-    else:
+    if is_vanitas := db.is_vanitas(message.chat.id):
         db.rm_vanitas(message.chat.id)
         await message.reply_text("Alert Mode Disable")
+    else:
+        db.set_vanitas(message.chat.id)
+        await message.reply_text("Alert Mode Enable")
 
 
 @bot.on_message(filters.new_chat_members)
@@ -52,5 +51,3 @@ def valert(_, m: Message):
                                          callback_data=f"mute:mute:{user}")
                 ],
             ]))
-    else:
-        pass
