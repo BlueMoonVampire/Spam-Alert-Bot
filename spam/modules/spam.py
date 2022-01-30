@@ -8,10 +8,7 @@ from pyrogram.types import Message
 def is_admin(group_id: int, user_id: int):
     try:
         user_data = bot.get_chat_member(group_id, user_id)
-        if user_data.status == 'administrator' or user_data.status == 'creator':
-            return True
-        else:
-            return False
+        return user_data.status in ['administrator', 'creator']
     except:
         return False
 

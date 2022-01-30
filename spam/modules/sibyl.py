@@ -17,13 +17,12 @@ s = sibyl()
 async def sibylalert(_, message):
     if is_admin(message.chat.id, message.from_user.id):
         return
-    is_sibyl = db.is_sibyl(message.chat.id)
-    if not is_sibyl:
-        db.set_sibyl(message.chat.id)
-        await message.reply_text("Sibyl Alert Enable")
-    else:
+    if is_sibyl := db.is_sibyl(message.chat.id):
         db.rm_sibyl(message.chat.id)
         await message.reply_text("Sibyl Alert Disable")
+    else:
+        db.set_sibyl(message.chat.id)
+        await message.reply_text("Sibyl Alert Enable")
 
 
 @bot.on_message(filters.new_chat_members)
@@ -52,5 +51,3 @@ def salert(_, m: Message):
                                          callback_data=f"mute:mute:{user}")
                 ],
             ]))
-    else:
-        pass
