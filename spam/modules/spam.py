@@ -2,7 +2,6 @@ from pyrogram import filters
 from spam import bot
 from time import time
 from pyrogram.types import ChatPermissions
-from requests import get
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.types import Message
 
