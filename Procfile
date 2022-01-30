@@ -1,0 +1,1 @@
+moe: python -m spam
